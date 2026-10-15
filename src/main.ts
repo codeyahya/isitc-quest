@@ -5,7 +5,7 @@ import { Dialogue } from "./dialogue";
 import { nearbyActor } from "./interaction";
 import { Player } from "./player";
 import { Renderer } from "./renderer";
-import { complete, quizStatus, trackerText } from "./quests";
+import { complete, totalQuizQuestions, trackerText } from "./quests";
 import { showQuiz } from "./quiz";
 import { ActorConfig, QuestState, TiledMap, WorldName } from "./types";
 import { AudioManager } from "./audio";
@@ -201,7 +201,7 @@ function updateHud(): void {
         )
         .join("")
     : "Aucun accomplissement pour le moment.";
-  scoreTracker.textContent = `${quest.quiz.score} points · ${quest.quiz.totalAnswered}/12 réponses · ${quest.quiz.correct} correcte(s)`;
+  scoreTracker.textContent = `${quest.quiz.score} points · ${quest.quiz.totalAnswered}/${totalQuizQuestions()} réponses · ${quest.quiz.correct} correcte(s)`;
 }
 
 function unlockAchievement(message: string): void {

@@ -17,9 +17,12 @@ export function showQuiz(element: HTMLElement, service: ServiceId, state: QuestS
   let correctCount = 0;
   const renderQuestion = (): void => {
     const question = questions[index];
+    let submitted = false;
     element.classList.remove('hidden');
     element.innerHTML = `<div class="panel quiz-panel"><p class="quiz-progress">Question ${index + 1}/${questions.length} · Score : ${state.quiz.score}</p><h2>Quiz — ${service}</h2><p>${question.question}</p><div class="answers">${question.answers.map((answer, i) => `<button data-answer="${i}">${i + 1}. ${answer}</button>`).join('')}</div></div>`;
     element.querySelectorAll<HTMLButtonElement>('button').forEach((button) => button.addEventListener('click', () => {
+      if (submitted) return;
+      submitted = true;
       const isCorrect = Number(button.dataset.answer) === question.correct;
       state.quiz.answered.push(question.id);
       state.quiz.totalAnswered += 1;

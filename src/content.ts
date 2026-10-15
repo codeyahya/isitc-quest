@@ -46,7 +46,7 @@ export const actors: Record<WorldName, ActorConfig[]> = {
   interior: [
     {
       id: "student",
-      name: "Maya · accueil étudiant",
+      name: "Service Étudiant",
       sprite: "/characters/staff_student.png",
       x: 300,
       y: 300,
@@ -57,7 +57,7 @@ export const actors: Record<WorldName, ActorConfig[]> = {
     },
     {
       id: "admin",
-      name: "Nour · administration",
+      name: "Administration",
       sprite: "/characters/staff_admin.png",
       x: 1030,
       y: 300,
@@ -68,7 +68,7 @@ export const actors: Record<WorldName, ActorConfig[]> = {
     },
     {
       id: "pedago",
-      name: "Samir · pédagogie",
+      name: "Pédagogie",
       sprite: "/characters/staff_pedago.png",
       x: 1040,
       y: 620,
@@ -79,11 +79,12 @@ export const actors: Record<WorldName, ActorConfig[]> = {
     },
     {
       id: "tech",
-      name: "Lina · assistance technique",
+      name: "Service Technique",
       sprite: "/characters/staff_tech.png",
       x: 300,
       y: 620,
       kind: "npc",
+      service: "tech",
       idleDirection: "down",
       idleFrame: 1,
     },
@@ -166,7 +167,7 @@ export const dialogues: Record<string, Dialogue> = {
   },
 
   tech: {
-    name: "Assistance technique",
+    name: "Service technique",
     lines: [
       "Salut ! Tu as une question sur les outils numériques ? Je peux t'expliquer quelques notions utiles pour bien commencer à l'université.",
       "L'ENT, ou espace numérique de travail, désigne généralement un portail qui regroupe différents services numériques liés à un établissement. Les fonctionnalités disponibles dépendent de la plateforme utilisée.",
