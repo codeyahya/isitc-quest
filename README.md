@@ -42,6 +42,8 @@ Le bouton `Options`, placé au-dessus à droite de la boîte de jeu, ouvre le m�
 
 Sur grand écran, l’interface de jeu occupe toute la fenêtre : le HUD vertical est dans la colonne gauche et la boîte Canvas conserve son ratio 16:9 dans la colonne droite. Sur écran étroit, les deux colonnes s’empilent pour garder le HUD et la carte accessibles sans déformer les tuiles.
 
+Les tailles de texte du HUD et des panneaux de dialogue/quiz sont centralisées dans `src/style.css` pour rester compactes avec Press Start 2P. Les noms dessinés sur le Canvas utilisent également une constante de taille dédiée dans `src/renderer.ts`.
+
 Les dépendances originales référencées par les TMX sont conservées dans `public/` aux chemins relatifs attendus :
 
 - `public/maps/tilesets/campus_exterior_tiles.tsx`

@@ -1,12 +1,6 @@
 import "./style.css";
 import { loadTmx } from "./mapLoader";
-import {
-  actors,
-  characterScaleByWorld,
-  dialogues,
-  movementSpeedMultiplierByWorld,
-  services,
-} from "./content";
+import { actors, characterScaleByWorld, dialogues, services } from "./content";
 import { Dialogue } from "./dialogue";
 import { nearbyActor } from "./interaction";
 import { Player } from "./player";
@@ -44,7 +38,8 @@ let player: Player;
 let last = performance.now();
 let paused = false;
 let nearest: ActorConfig | undefined;
-let characterSpeed = 92;
+let exteriorSpeed = 92;
+let interiorSpeed = 92;
 
 document.querySelector("#start-button")!.addEventListener("click", () => {
   audio.unlock();
@@ -55,14 +50,14 @@ document
   .querySelector("#help-button")!
   .addEventListener("click", () =>
     showHomeInfo(
-      "<strong>Comment jouer</strong><br>Utilise les flèches pour te déplacer. Oriente-toi vers un personnage ou une porte, puis appuie sur <kbd>E</kbd> pour interagir.<br><br><button data-close-info>Fermer</button>",
+      "<strong>Comment jouer</strong><br>Utilise les flèches pour te déplacer. Dirige-toi vers un personnage ou une porte, puis appuie sur <kbd>E</kbd> pour interagir.<br><br><button data-close-info>Fermer</button>",
     ),
   );
 document
   .querySelector("#about-button")!
   .addEventListener("click", () =>
     showHomeInfo(
-      "<strong>À propos</strong><br>Une petite aventure pédagogique en Canvas natif, conçue pour découvrir le campus et ses services sans inventer de procédures institutionnelles.<br><br><button data-close-info>Fermer</button>",
+      "<strong>À propos</strong><br>Projet Jeu Web Study Skills réalisé à l'aide de TypeScript et de Canvas.<br><br><button data-close-info>Fermer</button>",
     ),
   );
 document.querySelector("#home-info")!.addEventListener("click", (event) => {
@@ -101,11 +96,13 @@ document
   .addEventListener("click", () =>
     document.querySelector("#completion")!.classList.add("hidden"),
   );
-document.querySelector("#options-button")!.addEventListener("click", (event) => {
-  event.stopPropagation();
-  paused = true;
-  document.querySelector("#pause")!.classList.remove("hidden");
-});
+document
+  .querySelector("#options-button")!
+  .addEventListener("click", (event) => {
+    event.stopPropagation();
+    paused = true;
+    document.querySelector("#pause")!.classList.remove("hidden");
+  });
 document.querySelector("#close-options")!.addEventListener("click", (event) => {
   event.stopPropagation();
   paused = false;
@@ -114,9 +111,10 @@ document.querySelector("#close-options")!.addEventListener("click", (event) => {
 const speedSlider = document.querySelector<HTMLInputElement>("#speed-slider")!;
 const speedValue = document.querySelector<HTMLOutputElement>("#speed-value")!;
 speedSlider.addEventListener("input", () => {
-  characterSpeed = Number(speedSlider.value);
-  speedValue.value = `${characterSpeed}`;
-  if (player) player.setSpeed(characterSpeed);
+  const selectedSpeed = clampSpeed(Number(speedSlider.value));
+  if (world === "interior") interiorSpeed = selectedSpeed;
+  else exteriorSpeed = selectedSpeed;
+  applyPlayerSpeed();
 });
 
 async function start(): Promise<void> {
@@ -150,9 +148,27 @@ async function loadWorld(
     x ?? (world === "exterior" ? 80 : 760),
     y ?? (world === "exterior" ? 150 : 760),
   );
-  player.setSpeed(characterSpeed);
-  player.setSpeedMultiplier(movementSpeedMultiplierByWorld[world]);
+  if (world === "interior") interiorSpeed = getSliderMaximum();
+  speedSlider.value = `${world === "interior" ? interiorSpeed : exteriorSpeed}`;
+  applyPlayerSpeed();
   updateHud();
+}
+
+function applyPlayerSpeed(): void {
+  const effectiveSpeed = world === "interior" ? interiorSpeed : exteriorSpeed;
+  speedSlider.value = `${effectiveSpeed}`;
+  speedValue.value = `${effectiveSpeed}`;
+  player?.setSpeed(effectiveSpeed);
+}
+
+function clampSpeed(speed: number): number {
+  const minimum = Number(speedSlider.min) || 40;
+  const maximum = Number(speedSlider.max) || 180;
+  return Math.max(minimum, Math.min(maximum, Number.isFinite(speed) ? speed : minimum));
+}
+
+function getSliderMaximum(): number {
+  return clampSpeed(Number(speedSlider.max));
 }
 
 function showHomeInfo(content: string): void {

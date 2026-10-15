@@ -9,16 +9,26 @@
   color: #f4f7ff;
   background: #08090d;
   --black: #08090d;
-  --surface: #151515;
-  --surface-soft: #242424;
-  --line: #414141;
+  --surface: rgb(17, 17, 17);
+  --surface-soft: rgb(30, 30, 30);
+  --line: rgb(60, 60, 60);
   --text-muted: #aeb8ca;
-  --accent: #74e0ca;
+  --accent: #74b1e0;
   --primary: #f5c96a;
   --danger: #e98396;
+  --hud-size: 10px;
+  --hud-heading-size: 11px;
+  --panel-size: 10px;
+  --panel-heading-size: 13px;
+  --interaction-size: 14px;
+  --interaction-heading-size: 17px;
+  --interaction-choice-size: 13px;
 }
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 html,
 body {
@@ -96,7 +106,7 @@ button:focus-visible {
 }
 #title-screen h1 {
   margin: 0;
-  font-size: clamp(32px, 5vw, 62px);
+  font-size: clamp(32px, 5vw, 40px);
   line-height: 1.08;
   color: #fff;
 }
@@ -173,15 +183,15 @@ button:focus-visible {
   gap: 12px;
   padding: 12px;
   background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  font-size: 14px;
-  line-height: 1.4;
+  border-right: 1px solid var(--line);
+  /* border-radius: 12px; */
+  font-size: var(--hud-size);
+  line-height: 1.35;
 }
 #hud section {
   flex: 0 0 auto;
   min-width: 0;
-  padding: 10px 14px;
+  padding: 8px 10px;
   border: 1px solid var(--line);
   border-radius: 10px;
   overflow-wrap: anywhere;
@@ -192,10 +202,11 @@ button:focus-visible {
 }
 #hud section strong {
   color: var(--accent);
+  font-size: var(--hud-heading-size);
 }
 #hud section:last-of-type { border-right: 1px solid var(--line); }
 #quest-tracker {
-  margin-top: 7px;
+  margin-top: 5px;
   color: var(--text-muted);
 }
 #quest-tracker,
@@ -206,7 +217,7 @@ button:focus-visible {
 }
 #achievement-list,
 #score-tracker {
-  margin-top: 7px;
+  margin-top: 5px;
   color: var(--text-muted);
   overflow-wrap: anywhere;
 }
@@ -219,7 +230,9 @@ button:focus-visible {
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 10px 16px;
+  padding: 7px 11px;
+  font-size: var(--interaction-size);
+  line-height: 1.4;
   color: var(--black);
   background: var(--primary);
   border-radius: 10px;
@@ -239,7 +252,8 @@ button:focus-visible {
   left: 50%;
   top: 18px;
   transform: translateX(-50%);
-  padding: 10px 16px;
+  padding: 7px 11px;
+  font-size: var(--hud-size);
   color: #07100a;
   background: #b8f2b0;
   border: 1px solid #e1ffdc;
@@ -258,13 +272,34 @@ button:focus-visible {
 #dialogue .panel {
   pointer-events: auto;
   width: min(900px, 100%);
+  font-size: var(--interaction-size);
+  line-height: 1.65;
+}
+#dialogue .panel h2 {
+  font-size: var(--interaction-heading-size);
+}
+#dialogue .panel p {
+  margin: 12px 0;
+}
+#dialogue .panel small {
+  font-size: 9px;
 }
 .panel {
   width: min(720px, 94vw);
-  padding: 26px;
+  padding: 18px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
+  font-size: var(--panel-size);
+  line-height: 1.55;
+}
+.panel h2 {
+  margin: 0 0 10px;
+  font-size: var(--panel-heading-size);
+  line-height: 1.4;
+}
+.panel p {
+  margin: 8px 0;
 }
 .speed-control {
   display: grid;
@@ -290,7 +325,6 @@ button:focus-visible {
   margin-top: 18px;
 }
 .panel h2 {
-  margin-top: 0;
   color: var(--accent);
 }
 .dialogue-panel {
@@ -307,10 +341,34 @@ button:focus-visible {
 }
 .panel small {
   color: var(--text-muted);
+  font-size: 8px;
 }
 .answers {
   display: grid;
-  gap: 10px;
+  gap: 7px;
+}
+.answers button {
+  padding: 9px 12px;
+  font-size: var(--panel-size);
+  line-height: 1.45;
+}
+#quiz .panel {
+  font-size: var(--interaction-size);
+  line-height: 1.6;
+}
+#quiz .panel h2 {
+  font-size: var(--interaction-heading-size);
+}
+#quiz .panel p {
+  margin: 12px 0;
+}
+#quiz .answers button {
+  padding: 11px 14px;
+  font-size: var(--interaction-choice-size);
+  line-height: 1.55;
+}
+#quiz .quiz-progress {
+  font-size: 11px;
 }
 kbd {
   padding: 2px 6px;
@@ -355,10 +413,10 @@ kbd {
     height: 86px;
   }
   #hud {
-    font-size: 11px;
+    font-size: 9px;
   }
   #hud section {
-    padding: 7px;
+    padding: 6px 7px;
   }
   #dialogue {
     padding: 0 8px;

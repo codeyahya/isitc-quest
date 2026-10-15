@@ -5,11 +5,6 @@ export const characterScaleByWorld: Record<WorldName, number> = {
   interior: 2.7,
 };
 
-export const movementSpeedMultiplierByWorld: Record<WorldName, number> = {
-  exterior: 1,
-  interior: 1.35,
-};
-
 export const services: Array<{ id: ServiceId; label: string }> = [
   { id: "student", label: "Service étudiant" },
   { id: "admin", label: "Service administratif" },
@@ -103,61 +98,82 @@ export const actors: Record<WorldName, ActorConfig[]> = {
   ],
 };
 
-export const dialogues: Record<string, { name: string; lines: string[] }> = {
+type Dialogue = {
+  name: string;
+  lines: string[];
+};
+
+export const dialogues: Record<string, Dialogue> = {
   guide: {
     name: "Ancien étudiant",
     lines: [
-      "Bienvenue à ISITCOM ! Je connais quelques bons réflexes pour une première journée.",
-      "Pour trouver une salle, repère d’abord le hall et les panneaux : les indications peuvent changer selon l’organisation du jour.",
-      "Un CM est généralement un cours magistral, un TD permet de travailler les notions, et un TP met l’accent sur la pratique.",
-      "N’hésite pas à demander ton chemin : prendre ses repères prend du temps quand on arrive à l’université.",
-      "Commence par l’entrée du bâtiment, puis découvre chaque service à ton rythme.",
+      "Salut ! Bienvenue à ISITCOM ! Je me souviens encore de ma première journée ici. Au début, on a l'impression que tout est nouveau, mais tu vas vite prendre tes repères.",
+      "Mon premier conseil : prends le temps de repérer les salles, les escaliers et les différents services. Regarde les panneaux et vérifie ton emploi du temps avant de te déplacer.",
+      "Tu verras souvent les abréviations CM, TD et TP. Un CM est un cours magistral, un TD sert à approfondir les notions avec des exercices, et un TP permet de mettre les connaissances en pratique.",
+      "Ne te contente pas de mémoriser ton emploi du temps. Essaie aussi de comprendre où se trouvent tes salles et prévois un peu de temps pour passer d'un cours à l'autre.",
+      "Si tu as une question sur les cours, les groupes ou l'organisation de la journée, demande au délégué de classe ou au service concerné. C'est toujours mieux que de rester dans le doute.",
+      "Pense aussi à consulter régulièrement les plateformes et les espaces numériques utilisés par tes enseignants pour vérifier les annonces, les supports de cours et les éventuels changements.",
+      "Un autre conseil : garde tes cours bien organisés dès le début. Note les informations importantes, révise régulièrement et évite d'attendre la veille d'un contrôle pour commencer.",
+      "Et surtout, n'aie pas peur de demander de l'aide. Tout le monde a été nouveau un jour, et prendre ses repères fait partie de l'expérience universitaire.",
+      "Pour commencer, dirige-toi vers l'entrée du bâtiment, puis découvre les différents services. Avance étape par étape : tu n'as pas besoin de tout connaître dès le premier jour !",
     ],
   },
   delegate: {
     name: "Délégué de classe",
     lines: [
-      "Salut ! Je peux t’aider à prendre tes marques sans inventer de règles propres à l’établissement.",
-      "Pour une salle ou un horaire, compare ton emploi du temps avec les affichages et les informations officielles.",
-      "Les services du bâtiment peuvent orienter les étudiants ; leurs rôles sont différents, alors pose une question précise.",
-      "La vie de première année, c’est aussi apprendre à s’organiser et à demander de l’aide au bon moment.",
-      "Si tu hésites entre CM, TD et TP, demande le format prévu dans ton emploi du temps.",
+      "Salut ! Tu es nouveau ici ? Bienvenue à ISITCOM ! Si tu as du mal à t'y retrouver au début, ne t'inquiète pas, je peux t'aider à prendre tes repères.",
+      "Le premier réflexe à avoir, c'est de bien consulter ton emploi du temps. Vérifie les salles, les horaires et les groupes pour éviter les mauvaises surprises.",
+      "Si tu ne trouves pas une salle, regarde les panneaux d'affichage ou demande aux étudiants autour de toi. En cas de doute, vérifie toujours les informations officielles.",
+      "Tu découvriras plusieurs services dans le bâtiment. Chacun a un rôle différent, alors explique clairement ta situation pour qu'on puisse t'orienter vers le bon interlocuteur.",
+      "Petit rappel : CM signifie cours magistral, TD signifie travaux dirigés et TP signifie travaux pratiques. Le format prévu dépend de ton emploi du temps, alors prends le temps de le vérifier.",
+      "Un conseil pour bien commencer l'année : note les informations importantes, garde tes documents organisés et consulte régulièrement les annonces de tes enseignants.",
+      "Et si tu as un problème avec ton groupe, ton emploi du temps ou une information administrative, ne reste pas bloqué tout seul. Demande de l'aide au service concerné.",
+      "Enfin, profite de cette première journée pour découvrir les lieux et faire connaissance avec les autres étudiants. Tu n'es pas obligé de tout maîtriser dès le premier jour !",
     ],
   },
   student: {
-    name: "Maya · accueil étudiant",
+    name: "Accueil étudiant",
     lines: [
-      "Bienvenue ! Le service étudiant est un point d’orientation pour les questions liées à la vie étudiante.",
-      "Il peut t’aider à identifier le bon interlocuteur, mais vérifie toujours les informations précises auprès des sources officielles.",
-      "Pour te repérer, note les noms des espaces et garde une liste de tes questions.",
-      "Prends le temps de rencontrer d’autres étudiants : les échanges rendent le campus plus facile à découvrir.",
+      "Bonjour et bienvenue à ISITCOM ! Tu découvres le campus ? Pas de souci, c'est normal de ne pas tout connaître dès le premier jour.",
+      "Si tu ne sais pas vers qui te tourner, explique-moi ce que tu cherches. Je pourrai t'aider à identifier le service ou la personne à contacter.",
+      "Un petit conseil : note les noms des différents espaces et les informations importantes que tu découvres aujourd'hui. Ça t'évitera de devoir tout rechercher plus tard.",
+      "N'hésite pas non plus à discuter avec les autres étudiants. Ils pourront partager leurs expériences et t'aider à mieux comprendre la vie universitaire.",
+      "Prends ton temps pour découvrir les lieux. Une fois que tu connaîtras les principaux repères, tu te sentiras beaucoup plus à l'aise !",
     ],
   },
+
   admin: {
-    name: "Nour · administration",
+    name: "Administration",
     lines: [
-      "Je peux t’expliquer le rôle général du service administratif.",
-      "Les démarches ne sont pas toutes identiques : les pièces et les dates doivent être vérifiées dans la source officielle correspondante.",
-      "Quand tu écris une question, indique clairement le sujet et conserve la réponse utile.",
-      "Une bonne organisation te laisse plus de temps pour les cours et la découverte du campus.",
+      "Bonjour ! Le service administratif s'occupe de différentes démarches liées à la gestion des dossiers et à la situation administrative des étudiants.",
+      "Pour une démarche précise, vérifie toujours les documents nécessaires, les délais et les consignes auprès de la source officielle concernée. Mieux vaut vérifier que devoir recommencer !",
+      "Lorsque tu poses une question, explique clairement ta situation et précise le sujet de ta demande. Cela facilite les échanges et permet de mieux t'orienter.",
+      "Pense à conserver les documents importants et les réponses utiles que tu reçois. Un dossier bien organisé peut te faire gagner beaucoup de temps.",
+      "Et surtout, si une consigne te semble ambiguë, demande une clarification avant d'entreprendre une démarche. C'est plus simple que de corriger une erreur par la suite.",
     ],
   },
+
   pedago: {
-    name: "Samir · pédagogie",
+    name: "Service pédagogique",
     lines: [
-      "Le service pédagogique aide à comprendre l’organisation des apprentissages.",
-      "Un CM est généralement un cours magistral ; un TD accompagne la compréhension avec des exercices.",
-      "Un TP permet de mettre les notions en pratique, souvent avec du matériel ou une activité guidée.",
-      "Pour trouver une salle, lis attentivement ton emploi du temps et demande confirmation si un détail n’est pas clair.",
+      "Bonjour ! Tu veux mieux comprendre l'organisation des cours ? Commençons par les trois formats que tu rencontreras souvent à l'université.",
+      "Le CM, ou cours magistral, sert principalement à présenter et expliquer les notions du programme. Il est souvent centré sur les explications de l'enseignant.",
+      "Le TD, ou travaux dirigés, permet d'approfondir ces notions à travers des exercices, des applications et des échanges avec l'enseignant.",
+      "Le TP, ou travaux pratiques, met davantage l'accent sur l'application concrète des connaissances. En informatique, cela peut notamment passer par la programmation et la manipulation d'outils.",
+      "Ces trois formats sont complémentaires. Pour savoir où et quand tu dois assister à chacun, consulte ton emploi du temps et vérifie les éventuelles mises à jour.",
+      "Si tu as un doute sur un groupe, une séance ou une salle, demande confirmation auprès de la personne ou du service compétent plutôt que de te fier à une information incertaine.",
     ],
   },
+
   tech: {
-    name: "Lina · assistance technique",
+    name: "Assistance technique",
     lines: [
-      "Le service technique peut orienter les questions liées aux outils numériques.",
-      "L’ENT désigne généralement un espace numérique regroupant des services de l’établissement.",
-      "Moodle est généralement une plateforme de cours et d’activités en ligne.",
-      "Les outils disponibles peuvent varier : utilise les indications officielles et demande de l’aide si une connexion bloque.",
+      "Salut ! Tu as une question sur les outils numériques ? Je peux t'expliquer quelques notions utiles pour bien commencer à l'université.",
+      "L'ENT, ou espace numérique de travail, désigne généralement un portail qui regroupe différents services numériques liés à un établissement. Les fonctionnalités disponibles dépendent de la plateforme utilisée.",
+      "Moodle est une plateforme d'apprentissage en ligne qui peut permettre de consulter des ressources pédagogiques, de réaliser des activités ou de suivre les consignes publiées par les enseignants.",
+      "Premier réflexe en cas de problème de connexion : vérifie tes identifiants, ta connexion Internet et les éventuels messages d'erreur avant de réessayer.",
+      "Si le problème persiste, note le message d'erreur et explique les étapes qui ont conduit au problème. Ces informations aideront la personne chargée de l'assistance à comprendre la situation.",
+      "Enfin, utilise les liens et les instructions communiqués par les sources officielles de l'établissement. Ne suppose pas qu'un outil ou un service est disponible sans l'avoir vérifié.",
     ],
   },
 };
@@ -169,140 +185,221 @@ export interface QuizQuestion {
   correct: number;
   explanation: string;
 }
+
 export const quizzes: Record<ServiceId, QuizQuestion[]> = {
   student: [
     {
       id: "student-orientation",
-      question: "Quel réflexe aide à s’orienter pendant une première journée ?",
+      question: "Tu cherches un service sur le campus. Quel est le meilleur réflexe ?",
       answers: [
-        "Lire les indications et demander confirmation",
-        "Deviner les salles",
-        "Suivre quelqu’un au hasard",
+        "Repérer les indications et demander son chemin si nécessaire",
+        "Entrer dans la première salle venue",
+        "Attendre que quelqu’un devine ce que tu cherches",
       ],
       correct: 0,
       explanation:
-        "Les panneaux, l’emploi du temps et une question posée au bon interlocuteur facilitent l’orientation.",
+        "Les indications et les questions posées aux bonnes personnes permettent de s’orienter plus facilement.",
     },
     {
-      id: "student-service",
-      question: "Quel est le rôle général d’un service étudiant ?",
+      id: "student-help",
+      question: "Tu ne sais pas à qui poser une question sur la vie étudiante. Que faire ?",
       answers: [
-        "Orienter vers les informations de vie étudiante",
-        "Attribuer toutes les notes",
-        "Remplacer les enseignants",
+        "Demander à être orienté vers le bon interlocuteur",
+        "Poser la même question à tout le monde sans expliquer le problème",
+        "Abandonner ta recherche",
       ],
       correct: 0,
       explanation:
-        "Un service étudiant peut orienter sur la vie étudiante ; les détails dépendent de l’établissement.",
+        "Expliquer clairement sa question permet de trouver plus facilement le service ou la personne adaptée.",
     },
     {
-      id: "student-prep",
-      question: "Quelle habitude aide à débuter l’université ?",
+      id: "student-integration",
+      question: "Quelle attitude peut t’aider à mieux t’intégrer à l’université ?",
       answers: [
-        "Noter ses questions et repères",
-        "Attendre sans rien vérifier",
-        "Ignorer son emploi du temps",
+        "Échanger avec les autres étudiants et partager des informations utiles",
+        "Éviter toute discussion avec tes camarades",
+        "Garder pour toi toutes les informations importantes",
       ],
       correct: 0,
       explanation:
-        "Garder des notes aide à structurer ses démarches et ses premiers repères.",
+        "Les échanges avec les autres étudiants peuvent faciliter la découverte du campus et la vie universitaire.",
+    },
+    {
+      id: "student-first-day",
+      question: "Tu découvres plusieurs endroits importants pendant ta première journée. Que devrais-tu faire ?",
+      answers: [
+        "Noter leurs noms et retenir comment les retrouver",
+        "Compter uniquement sur ta mémoire",
+        "Ignorer leur emplacement puisque tu reviendras plus tard",
+      ],
+      correct: 0,
+      explanation:
+        "Garder des repères permet de retrouver plus facilement les lieux lors des prochaines visites.",
     },
   ],
+
   admin: [
     {
-      id: "admin-check",
-      question: "Avant une démarche administrative, que faut-il faire ?",
+      id: "admin-documents",
+      question: "Tu dois préparer un dossier administratif. Par quoi commencer ?",
       answers: [
-        "Vérifier les informations officielles",
-        "Choisir des pièces au hasard",
-        "Se fier à une rumeur",
+        "Vérifier la liste officielle des documents demandés",
+        "Rassembler des documents au hasard",
+        "Utiliser la liste d’un autre étudiant sans la vérifier",
       ],
       correct: 0,
       explanation:
-        "Les pièces et dates varient selon la démarche : la source officielle est la référence.",
+        "Les documents nécessaires dépendent de la démarche. Vérifie toujours les consignes officielles.",
     },
     {
-      id: "admin-question",
-      question: "Comment poser une question administrative efficacement ?",
+      id: "admin-deadlines",
+      question: "Tu dois effectuer une démarche avec une date limite. Quel est le meilleur réflexe ?",
       answers: [
-        "Décrire clairement le sujet",
-        "Envoyer plusieurs demandes identiques",
-        "Omettre le contexte",
+        "Vérifier la date officielle et prévoir suffisamment de temps",
+        "Attendre le dernier jour sans rien préparer",
+        "Te fier à une date entendue dans une conversation",
       ],
       correct: 0,
       explanation:
-        "Un sujet clair et un contexte précis facilitent l’orientation, sans inventer de procédure.",
+        "Vérifier les délais et anticiper la préparation réduit le risque de manquer une échéance.",
     },
     {
-      id: "admin-planning",
-      question: "Quel outil aide à organiser ses rendez-vous et cours ?",
-      answers: ["Un agenda", "Une supposition", "Un écran éteint"],
+      id: "admin-request",
+      question: "Tu dois contacter l’administration pour résoudre un problème. Comment formuler ta demande ?",
+      answers: [
+        "Expliquer clairement le problème et donner le contexte nécessaire",
+        "Envoyer un message sans préciser le sujet",
+        "Envoyer plusieurs messages identiques immédiatement",
+      ],
       correct: 0,
       explanation:
-        "Un agenda ou calendrier aide à suivre ses échéances et son emploi du temps.",
+        "Une demande claire et suffisamment précise facilite la compréhension de ta situation.",
+    },
+    {
+      id: "admin-records",
+      question: "Après avoir reçu une réponse importante concernant une démarche, que faire ?",
+      answers: [
+        "Conserver la réponse et les documents associés",
+        "Supprimer la réponse immédiatement",
+        "Compter uniquement sur ta mémoire",
+      ],
+      correct: 0,
+      explanation:
+        "Conserver les informations utiles permet de les retrouver si tu dois vérifier une consigne plus tard.",
     },
   ],
+
   pedago: [
     {
       id: "pedago-cm",
-      question: "Que signifie généralement CM ?",
-      answers: ["Cours magistral", "Cours miniature", "Contrôle mensuel"],
+      question: "Pendant un CM, quel est généralement l’objectif principal ?",
+      answers: [
+        "Découvrir et comprendre les notions présentées par l’enseignant",
+        "Effectuer uniquement des démarches administratives",
+        "Se déplacer entre les différents services du campus",
+      ],
       correct: 0,
-      explanation: "Un CM est généralement un cours magistral.",
+      explanation:
+        "Un cours magistral présente principalement les notions et les connaissances du programme.",
     },
     {
       id: "pedago-td",
-      question:
-        "Quel format accompagne souvent la compréhension par des exercices ?",
-      answers: ["TD", "CM uniquement", "TP sans activité"],
+      question: "Tu veux approfondir une notion du cours en résolvant des exercices. Quel format correspond le mieux à cet objectif ?",
+      answers: [
+        "Un TD (travaux dirigés)",
+        "Un rendez-vous administratif",
+        "Une visite du campus",
+      ],
       correct: 0,
       explanation:
-        "Un TD, travaux dirigés, accompagne généralement la compréhension et la mise en application.",
+        "Les TD permettent généralement de travailler les notions à travers des exercices et des applications.",
     },
     {
       id: "pedago-tp",
-      question: "Quel format met l’accent sur la pratique ?",
-      answers: ["TP", "Titre provisoire", "Temps de pause"],
+      question: "En informatique, quelle activité correspond le mieux à un TP ?",
+      answers: [
+        "Écrire et tester un programme dans un environnement de travail",
+        "Vérifier une date limite administrative",
+        "Chercher le bureau d’un service",
+      ],
       correct: 0,
-      explanation: "Un TP, travaux pratiques, privilégie la pratique guidée.",
+      explanation:
+        "Les travaux pratiques permettent d’appliquer les connaissances, par exemple en programmant et en testant du code.",
+    },
+    {
+      id: "pedago-schedule",
+      question: "Ton emploi du temps indique un groupe et une salle pour un cours. Que dois-tu vérifier avant de t’y rendre ?",
+      answers: [
+        "L’horaire, la salle et le groupe indiqués",
+        "Uniquement le nom du cours",
+        "La salle utilisée par un autre étudiant au hasard",
+      ],
+      correct: 0,
+      explanation:
+        "Vérifier le groupe, l’horaire et la salle permet d’éviter les erreurs de déplacement.",
+    },
+    {
+      id: "pedago-revision",
+      question: "Tu ne comprends pas une notion après le cours. Quelle méthode est la plus utile ?",
+      answers: [
+        "Revoir le cours, essayer des exercices et demander une explication si nécessaire",
+        "Ignorer la notion jusqu’à l’examen",
+        "Mémoriser les réponses sans comprendre la méthode",
+      ],
+      correct: 0,
+      explanation:
+        "Revoir les notions, pratiquer et demander de l’aide permet de consolider progressivement ses connaissances.",
     },
   ],
+
   tech: [
     {
-      id: "tech-ent",
-      question: "À quoi sert généralement un ENT ?",
+      id: "tech-troubleshooting",
+      question: "Un ordinateur ou un outil numérique ne fonctionne pas comme prévu. Quel est le premier réflexe utile ?",
       answers: [
-        "Regrouper des services numériques de l’établissement",
-        "Remplacer les cours",
-        "Choisir une salle au hasard",
+        "Observer le problème et noter le message d’erreur",
+        "Modifier tous les paramètres sans vérifier",
+        "Supprimer immédiatement les fichiers du projet",
       ],
       correct: 0,
       explanation:
-        "Un ENT regroupe généralement des services numériques ; son contenu exact dépend de l’établissement.",
+        "Identifier le symptôme et conserver le message d’erreur aide à comprendre l’origine du problème.",
     },
     {
-      id: "tech-moodle",
-      question: "Quel usage correspond généralement à Moodle ?",
+      id: "tech-reproduction",
+      question: "Tu demandes de l’aide pour un problème informatique. Quelle information est la plus utile ?",
       answers: [
-        "Cours et activités en ligne",
-        "Transport sur le campus",
-        "Réservation d’un bâtiment",
+        "Les étapes effectuées et le résultat obtenu",
+        "Uniquement le fait que l’ordinateur ne marche pas",
+        "Une description sans rapport avec le problème",
       ],
       correct: 0,
       explanation:
-        "Moodle est généralement une plateforme de cours et d’activités en ligne.",
+        "Décrire les étapes et le résultat permet à la personne qui t’aide de mieux reproduire et diagnostiquer le problème.",
     },
     {
-      id: "tech-help",
-      question: "Que faire si un outil numérique ne fonctionne pas ?",
+      id: "tech-restart",
+      question: "Une application semble bloquée. Quelle première action raisonnable peux-tu essayer ?",
       answers: [
-        "Décrire le problème au bon interlocuteur",
-        "Multiplier les essais sans noter l’erreur",
-        "Abandonner immédiatement",
+        "Attendre un instant, vérifier son état et essayer de la relancer si nécessaire",
+        "Éteindre immédiatement tous les équipements disponibles",
+        "Supprimer l’application sans vérifier le problème",
       ],
       correct: 0,
       explanation:
-        "Décrire le contexte et le message affiché facilite l’aide, selon les moyens disponibles.",
+        "Une vérification simple et une relance prudente peuvent résoudre certains blocages. Si le problème persiste, demande de l’aide.",
+    },
+    {
+      id: "tech-files",
+      question: "Tu travailles sur un projet informatique important. Quelle habitude limite le risque de perdre ton travail ?",
+      answers: [
+        "Enregistrer régulièrement et conserver des copies de sauvegarde",
+        "Garder toutes les modifications uniquement en mémoire",
+        "Supprimer les anciennes versions sans conserver de copie",
+      ],
+      correct: 0,
+      explanation:
+        "L’enregistrement régulier et les sauvegardes permettent de récupérer son travail en cas de problème.",
     },
   ],
 };

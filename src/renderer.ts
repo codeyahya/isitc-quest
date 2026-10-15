@@ -2,6 +2,9 @@ import { ActorConfig, Direction, TiledMap } from './types';
 
 export interface SpriteImage { image: HTMLImageElement; ready: boolean }
 
+const CANVAS_LABEL_FONT = '"Press Start 2P", monospace';
+const CANVAS_LABEL_SIZE = 11;
+
 export class Renderer {
   private readonly ctx: CanvasRenderingContext2D;
   private scale = 1;
@@ -97,7 +100,7 @@ export class Renderer {
       this.ctx.fillRect(x - 6, y - 16, 12, 16);
     }
     this.ctx.fillStyle = '#fff4d6';
-    this.ctx.font = `${Math.max(9, Math.round(11 * this.scale))}px "Press Start 2P", monospace`;
+    this.ctx.font = `${Math.max(6, Math.round(CANVAS_LABEL_SIZE * this.scale))}px ${CANVAS_LABEL_FONT}`;
     this.ctx.textAlign = 'center';
     this.ctx.fillText(actor.name, x, y - Math.max(20, Math.round(24 * this.scale)));
   }
@@ -107,7 +110,7 @@ export class Renderer {
     this.ctx.fillStyle = '#e87992';
     this.ctx.fillRect(x - 12, y - 6, 24, 12);
     this.ctx.fillStyle = '#fff4d6';
-    this.ctx.font = '11px "Press Start 2P", monospace';
+    this.ctx.font = `${CANVAS_LABEL_SIZE}px ${CANVAS_LABEL_FONT}`;
     this.ctx.textAlign = 'center';
     this.ctx.fillText(actor.name, x, y - 12);
   }

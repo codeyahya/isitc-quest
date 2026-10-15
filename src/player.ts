@@ -9,7 +9,6 @@ export class Player {
   moving = false;
   private animationTime = 0;
   private speed = 92;
-  private speedMultiplier = 1;
   constructor(
     private readonly map: TiledMap,
     x: number,
@@ -20,9 +19,6 @@ export class Player {
   }
   setSpeed(speed: number): void {
     this.speed = Math.max(40, Math.min(180, speed));
-  }
-  setSpeedMultiplier(multiplier: number): void {
-    this.speedMultiplier = Math.max(0.5, Math.min(2, multiplier));
   }
   update(keys: Set<string>, delta: number): void {
     const dx = Number(keys.has("ArrowRight")) - Number(keys.has("ArrowLeft"));
@@ -35,7 +31,7 @@ export class Player {
     if (Math.abs(dx) > Math.abs(dy)) this.direction = dx > 0 ? "right" : "left";
     else this.direction = dy > 0 ? "down" : "up";
     const length = Math.hypot(dx, dy) || 1;
-    const speed = (this.speed * this.speedMultiplier * delta) / 1000;
+    const speed = (this.speed * delta) / 1000;
     const next: Rect = {
       x: this.x + (dx / length) * speed - 7,
       y: this.y + (dy / length) * speed - 10,
