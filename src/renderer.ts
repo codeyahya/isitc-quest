@@ -49,7 +49,7 @@ export class Renderer {
 
   renderMap(map: TiledMap): void {
     this.project(map);
-    this.ctx.fillStyle = '#0f1930';
+    this.ctx.fillStyle = '#000000';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     map.layers.forEach((layer) => {
       layer.data.forEach((gid, index) => {
@@ -97,7 +97,7 @@ export class Renderer {
       this.ctx.fillRect(x - 6, y - 16, 12, 16);
     }
     this.ctx.fillStyle = '#fff4d6';
-    this.ctx.font = `${Math.max(9, Math.round(11 * this.scale))}px "Courier New", monospace`;
+    this.ctx.font = `${Math.max(9, Math.round(11 * this.scale))}px "Press Start 2P", monospace`;
     this.ctx.textAlign = 'center';
     this.ctx.fillText(actor.name, x, y - Math.max(20, Math.round(24 * this.scale)));
   }
@@ -107,7 +107,7 @@ export class Renderer {
     this.ctx.fillStyle = '#e87992';
     this.ctx.fillRect(x - 12, y - 6, 24, 12);
     this.ctx.fillStyle = '#fff4d6';
-    this.ctx.font = '11px "Courier New", monospace';
+    this.ctx.font = '11px "Press Start 2P", monospace';
     this.ctx.textAlign = 'center';
     this.ctx.fillText(actor.name, x, y - 12);
   }

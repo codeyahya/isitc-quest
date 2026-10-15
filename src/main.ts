@@ -272,6 +272,11 @@ function loop(now: number): void {
     nearest = nearbyActor(player.x, player.y, player.direction, actors[world]);
     prompt.textContent = nearest ? `E — ${nearest.name}` : "";
   }
-  requestAnimationFrame(loop);
+  async function boot(): Promise<void> {
+    await document.fonts.load('16px "Press Start 2P"');
+    await document.fonts.ready;
+    requestAnimationFrame(loop);
+  }
+  void boot();
 }
 requestAnimationFrame(loop);

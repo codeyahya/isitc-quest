@@ -40,6 +40,8 @@ L’écran Options, accessible avec `Échap`, contient le réglage `Vitesse du p
 
 Le bouton `Options`, placé au-dessus à droite de la boîte de jeu, ouvre le même panneau. La valeur du slider est la vitesse de base ; la carte intérieure applique automatiquement un multiplicateur de 1,35 pour faciliter les déplacements dans ses dimensions plus importantes. La carte extérieure conserve le multiplicateur 1.
 
+Sur grand écran, l’interface de jeu occupe toute la fenêtre : le HUD vertical est dans la colonne gauche et la boîte Canvas conserve son ratio 16:9 dans la colonne droite. Sur écran étroit, les deux colonnes s’empilent pour garder le HUD et la carte accessibles sans déformer les tuiles.
+
 Les dépendances originales référencées par les TMX sont conservées dans `public/` aux chemins relatifs attendus :
 
 - `public/maps/tilesets/campus_exterior_tiles.tsx`
