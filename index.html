@@ -24,6 +24,9 @@
       </div>
     </section>
     <section id="game-screen" class="screen hidden">
+      <div class="game-toolbar">
+        <button id="options-button" class="secondary" type="button">Options</button>
+      </div>
       <div id="game-box">
         <canvas id="game-canvas" width="1280" height="720" aria-label="Campus ISITCOM"></canvas>
         <div id="interaction-prompt"></div>
@@ -52,6 +55,7 @@
           <output id="speed-value" for="speed-slider">92</output>
           <input id="speed-slider" type="range" min="40" max="180" step="1" value="92">
         </label>
+        <button id="close-options" class="secondary" type="button">Fermer</button>
       </div>
     </div>
     <div id="completion" class="modal hidden">

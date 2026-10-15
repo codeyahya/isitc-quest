@@ -38,6 +38,8 @@ Les sept spritesheets fournis sont utilisés depuis `public/characters/`. Leur d
 
 L’écran Options, accessible avec `Échap`, contient le réglage `Vitesse du personnage` (40 à 180, valeur initiale 92). Il modifie directement la vitesse du joueur et reste actif lors des transitions entre cartes.
 
+Le bouton `Options`, placé au-dessus à droite de la boîte de jeu, ouvre le même panneau. La valeur du slider est la vitesse de base ; la carte intérieure applique automatiquement un multiplicateur de 1,35 pour faciliter les déplacements dans ses dimensions plus importantes. La carte extérieure conserve le multiplicateur 1.
+
 Les dépendances originales référencées par les TMX sont conservées dans `public/` aux chemins relatifs attendus :
 
 - `public/maps/tilesets/campus_exterior_tiles.tsx`
