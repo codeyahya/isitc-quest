@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quête à ISITCom</title>
+</head>
+
+<body>
+  <main id="app">
+    <section id="title-screen" class="screen">
+      <div class="home-content">
+        <p class="eyebrow">UNE AVENTURE D’ACCUEIL UNIVERSITAIRE</p>
+        <h1>Quête à ISITCOM: Academy Adventure</h1>
+        <p class="home-description">Explore le campus, rencontre étudiants et enseignants, accomplis tes premières
+          quêtes et découvre les services universitaires.</p>
+        <div class="home-actions">
+          <button id="start-button" class="primary">Jouer</button>
+          <button id="help-button" class="secondary">Comment jouer</button>
+          <button id="about-button" class="secondary">À propos</button>
+        </div>
+        <div id="home-info" class="home-info hidden"></div>
+      </div>
+    </section>
+    <section id="game-screen" class="screen hidden">
+      <div id="game-box">
+        <canvas id="game-canvas" width="1280" height="720" aria-label="Campus ISITCOM"></canvas>
+        <div id="interaction-prompt"></div>
+        <div id="achievement-notification" class="achievement-notification hidden"></div>
+        <div id="dialogue" class="modal hidden"></div>
+      </div>
+      <div id="hud">
+        <section><strong>Quêtes</strong>
+          <div id="quest-tracker"></div>
+        </section>
+        <section><strong>Accomplissements</strong>
+          <div id="achievement-list">Aucun accomplissement pour le moment.</div>
+        </section>
+        <section><strong>Score</strong>
+          <div id="score-tracker">0 point · 0/12 réponses</div>
+        </section>
+      </div>
+    </section>
+    <div id="quiz" class="modal hidden"></div>
+    <div id="pause" class="modal hidden">
+      <div class="panel">
+        <h2>Options</h2>
+        <p>Échap pour reprendre · R pour recommencer</p>
+        <label class="speed-control" for="speed-slider">
+          <span>Vitesse du personnage</span>
+          <output id="speed-value" for="speed-slider">92</output>
+          <input id="speed-slider" type="range" min="40" max="180" step="1" value="92">
+        </label>
+      </div>
+    </div>
+    <div id="completion" class="modal hidden">
+      <div class="panel">
+        <h2>Journée accomplie !</h2>
+        <p>Tu as découvert les quatre services et les principaux repères de ta première journée.</p><button
+          id="continue-button">Continuer à explorer</button>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
