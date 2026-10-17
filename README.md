@@ -23,6 +23,3 @@ npm run preview
 - `Échap` : pause
 - `R` : recommencer depuis l’extérieur
 
-Le HUD est placé sous la boîte de jeu afin de ne jamais recouvrir la carte. La boîte de jeu conserve un ratio 16:9 ; le dialogue est ancré à l’intérieur, à 20 px du bord inférieur. `E` est la seule touche d’interaction et de progression des dialogues.
-
-
