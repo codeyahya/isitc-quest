@@ -7,7 +7,6 @@ Depuis un terminal :
 ```bash
 git clone https://github.com/codeyahya/isitc-quest.git
 cd isitc-quest
-git pull origin main
 npm install
 npm run dev
 ```
